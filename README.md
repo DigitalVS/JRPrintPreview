@@ -1,5 +1,5 @@
 # JRPrintPreview
-JasperReports print preview window in JavaFX 8
+JasperReports print preview stage class written in JavaFX 8
 
 ### Usage Example
 ```
