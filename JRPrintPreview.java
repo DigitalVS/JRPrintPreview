@@ -116,7 +116,7 @@ public class JRPrintPreview extends Stage {
     btnPrint.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/net/sf/jasperreports/view/images/print.GIF")))); // NOI18N
     btnPrint.setTooltip(new Tooltip(resourceBundle.getString("print")));
     btnPrint.setPrefSize(23, 23);
-    btnPrint.setOnAction(this::onBtnPrint);
+    btnPrint.setOnAction(e -> onBtnPrint());
     btnPrint.setFocusTraversable(false);
 
     btnFirst.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/net/sf/jasperreports/view/images/first.GIF")))); // NOI18N
@@ -219,7 +219,31 @@ public class JRPrintPreview extends Stage {
         scrollPane.setFitToWidth(vBoxPage.prefWidth(-1) < arg2.getWidth());
         scrollPane.setFitToHeight(vBoxPage.prefHeight(-1) < arg2.getHeight());
       }});
+    scrollPane.vvalueProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
+        int pagesNo = jasperPrint.getPages().size();
+        double pageInterval = 1d / pagesNo;
+        double low = pageIndex * pageInterval;
+        double hi = low + pageInterval;
+        int tmpPageIndex = pageIndex;
 
+        if (hi < newValue.doubleValue() && pageIndex < pagesNo) { // Increase page index
+          while (hi < newValue.doubleValue()) {
+            tmpPageIndex++;
+            hi += pageInterval;
+          }
+
+          setPageIndex(tmpPageIndex);
+        } else if (low > newValue.doubleValue() && pageIndex > 0) { // Decrease page index
+          while (low > newValue.doubleValue()) {
+            tmpPageIndex--;
+            low -= pageInterval;
+          }
+
+          setPageIndex(tmpPageIndex);
+        }
+      }
+    );
+		
     lblStatus.setFont(new Font("Dialog", 10));
     statusBar.setAlignment(Pos.CENTER);
     statusBar.setMaxHeight(24);
@@ -417,7 +441,7 @@ public class JRPrintPreview extends Stage {
     setRealZoomRatio(heightRatio < widthRatio ? heightRatio : widthRatio);
   }
 
-  private void onBtnPrint(ActionEvent evt) {
+  private void onBtnPrint() {
     Task<Boolean> task = new Task<Boolean>() {
       @Override protected Boolean call() throws Exception {
         try {
