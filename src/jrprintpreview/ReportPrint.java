@@ -87,7 +87,12 @@ public class ReportPrint {
     Task<JasperPrint> task = createReportTask(paramMap, dataSource);
     task.setOnSucceeded((WorkerStateEvent event) -> {
       ownerWindow.getScene().setCursor(Cursor.DEFAULT);
-      reportPrint(task.getValue());
+
+      try {
+        JasperPrintManager.getInstance(DefaultJasperReportsContext.getInstance()).print(task.getValue(), true);
+      } catch (JRException ex) {
+        ex.printStackTrace();
+      }
     });
 
     Thread th = new Thread(task);
@@ -99,7 +104,10 @@ public class ReportPrint {
     Task<JasperPrint> task = createReportTask(paramMap, dataSource);
     task.setOnSucceeded((WorkerStateEvent event) -> {
       ownerWindow.getScene().setCursor(Cursor.DEFAULT);
-      reportPreview(task.getValue());
+
+      JRPrintPreview printPreview = new JRPrintPreview(task.getValue());
+      printPreview.initOwner(ownerWindow);
+      printPreview.show();
     });
 
     Thread th = new Thread(task);
@@ -118,19 +126,5 @@ public class ReportPrint {
 
     task.setOnFailed(event -> ownerWindow.getScene().setCursor(Cursor.DEFAULT));
     return task;
-  }
-
-  private void reportPreview(JasperPrint jasperPrint) {
-    JRPrintPreview printPreview = new JRPrintPreview(jasperPrint);
-    printPreview.initOwner(ownerWindow);
-    printPreview.show();
-  }
-
-  private void reportPrint(JasperPrint jasperPrint) {
-    try {
-      JasperPrintManager.getInstance(DefaultJasperReportsContext.getInstance()).print(jasperPrint, true);
-    } catch (JRException ex) {
-      ex.printStackTrace();
-    }
   }
 }
