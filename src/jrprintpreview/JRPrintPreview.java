@@ -1,4 +1,4 @@
-package jasperreports;
+package jrprintpreview;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -211,14 +211,13 @@ public class JRPrintPreview extends Stage {
     scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
     scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
     scrollPane.setContent(vBoxPage);
-    scrollPane.viewportBoundsProperty().addListener(new ChangeListener<Bounds>() {
-      public void changed(ObservableValue<? extends Bounds> arg0, Bounds arg1, Bounds arg2) {
+    scrollPane.viewportBoundsProperty().addListener((ObservableValue<? extends Bounds> arg0, Bounds arg1, Bounds arg2) -> {
         if (btnFitWidth.isSelected())
           onSetFitToWidthPressed();
 
         scrollPane.setFitToWidth(vBoxPage.prefWidth(-1) < arg2.getWidth());
         scrollPane.setFitToHeight(vBoxPage.prefHeight(-1) < arg2.getHeight());
-      }});
+      });
     scrollPane.vvalueProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
         int pagesNo = jasperPrint.getPages().size();
         double pageInterval = 1d / pagesNo;
