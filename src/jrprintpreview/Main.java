@@ -36,7 +36,7 @@ public class Main extends Application {
 
   private MenuBar createMenus() {
     Menu menuFile = new Menu("_File");
-    MenuItem exportMenu = new MenuItem("_Export");
+    MenuItem exportMenu = new MenuItem("_Export...");
     exportMenu.setOnAction(e -> export());
     MenuItem printMenu = new MenuItem("_Print");
     printMenu.setOnAction(e -> print());
@@ -68,7 +68,7 @@ public class Main extends Application {
 
   private Map<String, Object> getReportParams() {
     Map<String, Object> paramMap = new HashMap<>();
-    paramMap.put("COMPANY_NAME", "This is Company Name");
+    paramMap.put("COMPANY_NAME", "Company inc.");
     return paramMap;
   }
 

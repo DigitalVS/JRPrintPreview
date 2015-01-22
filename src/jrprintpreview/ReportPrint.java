@@ -84,14 +84,30 @@ public class ReportPrint {
   }
 
   public void print(Map<String, Object> paramMap, JRBeanCollectionDataSource dataSource) {
-    createReportTask(paramMap, dataSource, true);
+    Task<JasperPrint> task = createReportTask(paramMap, dataSource);
+    task.setOnSucceeded((WorkerStateEvent event) -> {
+      ownerWindow.getScene().setCursor(Cursor.DEFAULT);
+      reportPrint(task.getValue());
+    });
+
+    Thread th = new Thread(task);
+    th.setDaemon(true);
+    th.start();
   }
 
   public void printPreview(Map<String, Object> paramMap, JRBeanCollectionDataSource dataSource) {
-    createReportTask(paramMap, dataSource, false);
+    Task<JasperPrint> task = createReportTask(paramMap, dataSource);
+    task.setOnSucceeded((WorkerStateEvent event) -> {
+      ownerWindow.getScene().setCursor(Cursor.DEFAULT);
+      reportPreview(task.getValue());
+    });
+
+    Thread th = new Thread(task);
+    th.setDaemon(true);
+    th.start();
   }
 
-  private void createReportTask(Map<String, Object> paramMap, JRBeanCollectionDataSource dataSource, boolean printOrPreview) {
+  private Task<JasperPrint> createReportTask(Map<String, Object> paramMap, JRBeanCollectionDataSource dataSource) {
     Task<JasperPrint> task = new Task<JasperPrint>() {
       @Override
       protected JasperPrint call() throws Exception {
@@ -100,31 +116,19 @@ public class ReportPrint {
       }
     };
 
-    task.setOnSucceeded((WorkerStateEvent event) -> {
-      ownerWindow.getScene().setCursor(Cursor.DEFAULT);
-
-      if (printOrPreview)
-        reportPrint(task);
-      else
-        reportPreview(task);
-    });
-
     task.setOnFailed(event -> ownerWindow.getScene().setCursor(Cursor.DEFAULT));
-
-    Thread th = new Thread(task);
-    th.setDaemon(true);
-    th.start();
+    return task;
   }
 
-  private void reportPreview(Task<JasperPrint> task) {
-    JRPrintPreview printPreview = new JRPrintPreview(task.getValue());
+  private void reportPreview(JasperPrint jasperPrint) {
+    JRPrintPreview printPreview = new JRPrintPreview(jasperPrint);
     printPreview.initOwner(ownerWindow);
     printPreview.show();
   }
 
-  private void reportPrint(Task<JasperPrint> task) {
+  private void reportPrint(JasperPrint jasperPrint) {
     try {
-      JasperPrintManager.getInstance(DefaultJasperReportsContext.getInstance()).print(task.getValue(), true);
+      JasperPrintManager.getInstance(DefaultJasperReportsContext.getInstance()).print(jasperPrint, true);
     } catch (JRException ex) {
       ex.printStackTrace();
     }
