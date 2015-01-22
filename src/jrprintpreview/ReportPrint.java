@@ -84,14 +84,14 @@ public class ReportPrint {
   }
 
   public void print(Map<String, Object> paramMap, JRBeanCollectionDataSource dataSource) {
-    getCreateReportTask(paramMap, dataSource, true);
+    createReportTask(paramMap, dataSource, true);
   }
 
   public void printPreview(Map<String, Object> paramMap, JRBeanCollectionDataSource dataSource) {
-    getCreateReportTask(paramMap, dataSource, false);
+    createReportTask(paramMap, dataSource, false);
   }
 
-  private void getCreateReportTask(Map<String, Object> paramMap, JRBeanCollectionDataSource dataSource, boolean printOrPreview) {
+  private void createReportTask(Map<String, Object> paramMap, JRBeanCollectionDataSource dataSource, boolean printOrPreview) {
     Task<JasperPrint> task = new Task<JasperPrint>() {
       @Override
       protected JasperPrint call() throws Exception {
