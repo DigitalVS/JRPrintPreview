@@ -1,4 +1,4 @@
-package jrprintpreview.jasperjavafx;
+package main.jrprintpreview;
 
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
@@ -261,8 +261,8 @@ public class JRPrintPreview extends Stage {
 
     for (int pageIndex = 0; pageIndex < jasperPrint.getPages().size(); pageIndex++) {
       try {
-        java.awt.Image awtImage = JasperPrintManager.getInstance(jasperReportsContext).printToImage(jasperPrint, pageIndex, realZoom);
-        Image image = SwingFXUtils.toFXImage(toBufferedImage(awtImage), null);
+        java.awt.image.BufferedImage awtImage = (BufferedImage) JasperPrintManager.getInstance(jasperReportsContext).printToImage(jasperPrint, pageIndex, realZoom);
+        Image image = SwingFXUtils.toFXImage(awtImage, null);
 
         ImageView iv = new ImageView(image);
         iv.setEffect(dropShadow);
@@ -272,20 +272,6 @@ public class JRPrintPreview extends Stage {
         ex.printStackTrace();
       }
     }
-  }
-
-  public static BufferedImage toBufferedImage(java.awt.Image img) {
-    if (img instanceof java.awt.image.BufferedImage)
-      return (BufferedImage) img;
-
-    // Create a buffered image with transparency
-    BufferedImage bufferedImage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
-
-    // Draw the image on to the buffered image
-    java.awt.Graphics2D bGr = bufferedImage.createGraphics();
-    bGr.drawImage(img, 0, 0, null);
-    bGr.dispose();
-    return bufferedImage;
   }
 
   protected void setZoomRatio(float newZoom) {
