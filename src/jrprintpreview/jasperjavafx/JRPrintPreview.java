@@ -1,4 +1,4 @@
-package jrprintpreview;
+package jrprintpreview.jasperjavafx;
 
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;

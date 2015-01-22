@@ -5,6 +5,7 @@ import javafx.concurrent.WorkerStateEvent;
 import javafx.scene.Cursor;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
+import jrprintpreview.jasperjavafx.JRPrintPreview;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
@@ -19,11 +20,11 @@ import net.sf.jasperreports.export.SimplePdfExporterConfiguration;
 import java.io.File;
 import java.util.Map;
 
-public class ReportPrint {
+public class Report {
   private JasperReport jasperReport;
   private Window ownerWindow;
 
-  public ReportPrint(String reportFileName, Window ownerWindow) {
+  public Report(String reportFileName, Window ownerWindow) {
     try {
       jasperReport = (JasperReport) JRLoader.loadObject(JRLoader.getResourceInputStream(reportFileName));
       this.ownerWindow = ownerWindow;

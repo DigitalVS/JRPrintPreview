@@ -38,7 +38,7 @@ public class Main extends Application {
     Menu menuFile = new Menu("_File");
     MenuItem exportMenu = new MenuItem("_Export...");
     exportMenu.setOnAction(e -> export());
-    MenuItem printMenu = new MenuItem("_Print");
+    MenuItem printMenu = new MenuItem("_Print...");
     printMenu.setOnAction(e -> print());
     MenuItem printPreviewMenu = new MenuItem("Print pre_view...");
     printPreviewMenu.setOnAction(e -> printPreview());
@@ -52,18 +52,18 @@ public class Main extends Application {
   }
 
   private void export() {
-    ReportPrint reportPrint = new ReportPrint("reports/Example.jasper", stage.getScene().getWindow());
-    reportPrint.export("Export report", "Report " + ".pdf", getReportParams(), new JRBeanCollectionDataSource(getReportData()));
+    Report report = new Report("reports/Example.jasper", stage.getScene().getWindow());
+    report.export("Export report", "Report " + ".pdf", getReportParams(), new JRBeanCollectionDataSource(getReportData()));
   }
 
   private void print() {
-    ReportPrint reportPrint = new ReportPrint("reports/Example.jasper", stage.getScene().getWindow());
-    reportPrint.print(getReportParams(), new JRBeanCollectionDataSource(getReportData()));
+    Report report = new Report("reports/Example.jasper", stage.getScene().getWindow());
+    report.print(getReportParams(), new JRBeanCollectionDataSource(getReportData()));
   }
 
   private void printPreview() {
-    ReportPrint reportPrint = new ReportPrint("reports/Example.jasper", stage.getScene().getWindow());
-    reportPrint.printPreview(getReportParams(), new JRBeanCollectionDataSource(getReportData()));
+    Report report = new Report("reports/Example.jasper", stage.getScene().getWindow());
+    report.printPreview(getReportParams(), new JRBeanCollectionDataSource(getReportData()));
   }
 
   private Map<String, Object> getReportParams() {
@@ -85,6 +85,7 @@ public class Main extends Application {
     items.add(new Person("Rudolf", "Lingens"));
     items.add(new Person("Tommy", "Atkins"));
     items.add(new Person("Richard", "Roe"));
+    items.add(new Person("John", "Smith"));
     return items;
   }
 }
