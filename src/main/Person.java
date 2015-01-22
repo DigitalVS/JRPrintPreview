@@ -1,4 +1,4 @@
-package jrprintpreview;
+package main;
 
 public class Person {
   String firstName;

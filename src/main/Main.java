@@ -1,4 +1,4 @@
-package jrprintpreview;
+package main;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -86,6 +86,9 @@ public class Main extends Application {
     items.add(new Person("Tommy", "Atkins"));
     items.add(new Person("Richard", "Roe"));
     items.add(new Person("John", "Smith"));
+    items.add(new Person("King", "Kong"));
+    items.add(new Person("Ping", "Pong"));
+    items.add(new Person("Sing", "Song"));
     return items;
   }
 }

@@ -1,11 +1,11 @@
-package jrprintpreview;
+package main;
 
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.scene.Cursor;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
-import jrprintpreview.jasperjavafx.JRPrintPreview;
+import main.jrprintpreview.JRPrintPreview;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
