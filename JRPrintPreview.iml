@@ -9,12 +9,11 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="jasperreports-6.0.0" level="project" />
-    <orderEntry type="library" name="commons-logging-1.1.1" level="project" />
-    <orderEntry type="library" name="itextpdf-5.5.0" level="project" />
-    <orderEntry type="library" name="itext-pdfa-5.5.0" level="project" />
+    <orderEntry type="library" name="commons-beanutils-1.9.0" level="project" />
     <orderEntry type="library" name="commons-collections-3.2.1" level="project" />
     <orderEntry type="library" name="commons-digester-2.1" level="project" />
-    <orderEntry type="library" name="commons-beanutils-1.9.0" level="project" />
+    <orderEntry type="library" name="commons-logging-1.1.1" level="project" />
+    <orderEntry type="library" name="itext-2.1.7.js4" level="project" />
+    <orderEntry type="library" name="jasperreports-6.2.0" level="project" />
   </component>
 </module>
