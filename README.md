@@ -2,7 +2,7 @@
 JasperReports print preview stage class written in JavaFX 8
 
 ### Usage Example
-Whole functionality is contained in a `JRPrintPreview.java` file. This file should be copied to your project. The rest of the files are part of the IntelliJ IDEA example project which demonstrates print preview functionality for one simple JasperReports report.
+Whole functionality is contained in a `JRPrintPreview.java` file. This file should be copied to your project. The rest of the files represent an example project which demonstrates print preview functionality for one simple JasperReports report.
 
 Basic usage is shown in the next example.
 
