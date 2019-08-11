@@ -2,7 +2,7 @@
 JasperReports print preview stage class written in JavaFX 8
 
 ### Usage Example
-Whole functionality is contained in a `JRPrintPreview.java` file. This file should be copied to your project. The rest of the files represent an example project which demonstrates print preview functionality for one simple JasperReports report.
+Whole functionality is contained in a `JRPrintPreview.java` file. This file should be copied to your project. The rest of the files represent example Maven project which demonstrates print preview functionality for one simple JasperReports report.
 
 Basic usage is shown in the next example.
 
@@ -19,6 +19,10 @@ JasperPrint jasperPrint = JasperFillManager.fillReport(
 JRPrintPreview printPreview = new JRPrintPreview(jasperPrint);
 printPreview.show();
 ```
+### Running on Java 9 and later versions
 
-This code should work on Java 9 and 10 as is. 
-For Java 11 and later don't forget to add JavaFX dependencies to pom.xml file.
+The example project should work on Java 9 and 10 as is if used with legacy classpath. Repository contains some additional files which have to be used to compile and execute provided example
+as Java 9+ module path application.
+
+For module path application, provided files `pom.xml.12` and `module-info.java.12` have to be renamed to `pom.xml` and `module-info.java` respectively. Pom.xml file is written specifically for Java 12 (as file extension indicates).
+For other Java versions user need to edit `pom.xml` file and to change Java version in Maven compile plugin configuration `source` and `target` tags, and also all `version` tags for JavaFX dependencies.
