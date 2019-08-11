@@ -19,3 +19,6 @@ JasperPrint jasperPrint = JasperFillManager.fillReport(
 JRPrintPreview printPreview = new JRPrintPreview(jasperPrint);
 printPreview.show();
 ```
+
+This code should work on Java 9 and 10 as is. 
+For Java 11 and later don't forget to add JavaFX dependencies to pom.xml file.

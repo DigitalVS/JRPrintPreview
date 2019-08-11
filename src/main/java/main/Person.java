@@ -1,8 +1,8 @@
 package main;
 
 public class Person {
-  String firstName;
-  String secondName;
+  private String firstName;
+  private String secondName;
 
   public Person(String firstName, String secondName) {
     this.firstName = firstName;

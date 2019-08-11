@@ -84,7 +84,7 @@ public class JRPrintPreview extends Stage {
     initResources(resBundle);
     screenResolution = Screen.getPrimary().getDpi();
     initComponents();
-    setZoomRatio(1);
+    setZoomRatio(0.75f);
 
     double width = vBoxPage.getBoundsInParent().getWidth() + 2 * SPACING + 13; // vBoxPage width + 2 * SPACING + vertical scroll bar width
     setWidth(width > 1000 ? 1000 : width);
@@ -194,7 +194,7 @@ public class JRPrintPreview extends Stage {
     cmbZoom.setPrefSize(80, 24);
     for (int zoom : zooms)
       cmbZoom.getItems().add(zoom + "%");
-    cmbZoom.getSelectionModel().select(2);
+    cmbZoom.getSelectionModel().select(1);
     cmbZoom.setFocusTraversable(false);
     cmbZoom.setOnAction(e -> onComboBoxZoomChanged());
     cmbZoom.addEventHandler(KeyEvent.KEY_PRESSED, (KeyEvent e) -> {
@@ -431,6 +431,8 @@ public class JRPrintPreview extends Stage {
           btnPrint.setDisable(true);
           getScene().setCursor(Cursor.WAIT);
           return JasperPrintManager.getInstance(jasperReportsContext).print(jasperPrint, true);
+          //JRPrinter jrPrinter = new JRPrinter(jasperReportsContext, jasperPrint, getOwner());
+          //return jrPrinter.printPages(true);
         } catch (JRException ex) {
           ex.printStackTrace();
         } finally {
