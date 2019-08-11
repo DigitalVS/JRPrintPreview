@@ -25,4 +25,4 @@ The example project should work on Java 9 and 10 as is if used with legacy class
 as Java 9+ module path application.
 
 For module path application, provided files `pom.xml.12` and `module-info.java.12` have to be renamed to `pom.xml` and `module-info.java` respectively. Pom.xml file is written specifically for Java 12 (as file extension indicates).
-For other Java versions user need to edit `pom.xml` file and to change Java version in Maven compile plugin configuration `source` and `target` tags, and also all `version` tags for JavaFX dependencies.
+For other Java versions user needs to edit `pom.xml` file and to change Java version for Maven compiler plugin `source` and `target` tags, and also all `version` tags for JavaFX dependencies.
